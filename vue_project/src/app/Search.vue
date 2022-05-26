@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button @click="search" type="button" class="btn btn-primary">検索</button>
+    <button class="btn btn-primary" type="button" @click="search">検索</button>
     <table class="table">
       <thead>
       <tr>
@@ -9,9 +9,9 @@
       </tr>
       </thead>
       <tbody>
-      <tr  v-for="item in items" :key="item.message">
-        <th scope="row">{{item.id}}</th>
-        <td>{{item.name}}</td>
+      <tr v-for="item in items" :key="item.message">
+        <th scope="row">{{ item.id }}</th>
+        <td>{{ item.name }}</td>
       </tr>
       </tbody>
     </table>
@@ -19,19 +19,20 @@
 </template>
 <script>
 import axios from 'axios';
+
 export default {
-  data(){
-    return{
+  data() {
+    return {
       items: []
     }
   },
   methods: {
-    search (){
+    search() {
       axios
           .get('http://localhost:8080/search')
           .then(
               response => {
-                for (let i=0; i<response.data.length; i++) {
+                for (let i = 0; i < response.data.length; i++) {
                   this.items.push(response.data[i]);
                 }
                 console.log(this.items);
